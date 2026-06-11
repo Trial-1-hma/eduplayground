@@ -1,0 +1,9 @@
+{
+  "servers": {
+    "agent-league": {
+      "type": "stdio",
+      "command": "node",
+      "args": ["${workspaceFolder}/mcp/server.js"]
+    }
+  }
+}

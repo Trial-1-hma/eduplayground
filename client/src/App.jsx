@@ -329,6 +329,8 @@ function App() {
   const [logoFeedback, setLogoFeedback] = useState(null);
   const [logoScore, setLogoScore] = useState(0);
   const [logoGuesserState, setLogoGuesserState] = useState('playing');
+  const [logoHint, setLogoHint] = useState(null);
+  const [logoHintLoading, setLogoHintLoading] = useState(false);
 
   const pronunciationIndexRef = useRef(pronunciationIndex);
   const roundWordsRef = useRef(roundWords);
@@ -1211,7 +1213,11 @@ function App() {
         {currentQuestion < questions.length - 1 && (
           <button className="primary-btn" onClick={() => setCurrentQuestion((prev) => prev + 1)}>Next</button>
         )}
-        <button className="primary-btn" onClick={submitExam}>Submit</button>
+        <button className="primary-btn" onClick={() => {
+          const remaining = questions.length - currentQuestion - 1;
+          if (remaining > 0 && !window.confirm(`${remaining} question${remaining === 1 ? '' : 's'} left. Are you sure you want to submit?`)) return;
+          submitExam();
+        }}>Submit</button>
       </div>
     </section>
   );
