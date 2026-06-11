@@ -111,7 +111,7 @@ const gameWords = [
   { word: 'bright', clue: 'Full of strong light, like the sun on a clear day.' },
 ];
 
-const photoQuizWords = [
+const photoQuizWords= [
   { answer: 'cup', prompt: 'Find and photograph a cup or mug!' },
   { answer: 'chair', prompt: 'Find and photograph a chair!' },
   { answer: 'book', prompt: 'Find and photograph a book!' },
@@ -132,10 +132,145 @@ const photoQuizWords = [
   { answer: 'table', prompt: 'Find and photograph a table!' },
   { answer: 'door', prompt: 'Find and photograph a door!' },
   { answer: 'window', prompt: 'Find and photograph a window!' },
+  { answer: 'mirror', prompt: 'Find and photograph a mirror!' },
+  { answer: 'towel', prompt: 'Find and photograph a towel!' },
+  { answer: 'soap', prompt: 'Find and photograph a bar of soap or soap dispenser!' },
+  { answer: 'toothbrush', prompt: 'Find and photograph a toothbrush!' },
+  { answer: 'comb', prompt: 'Find and photograph a comb or hairbrush!' },
+  { answer: 'scissors', prompt: 'Find and photograph a pair of scissors!' },
+  { answer: 'fork', prompt: 'Find and photograph a fork!' },
+  { answer: 'knife', prompt: 'Find and photograph a knife!' },
+  { answer: 'plate', prompt: 'Find and photograph a plate or dish!' },
+  { answer: 'bowl', prompt: 'Find and photograph a bowl!' },
+  { answer: 'mug', prompt: 'Find and photograph a mug!' },
+  { answer: 'glass', prompt: 'Find and photograph a drinking glass!' },
+  { answer: 'pan', prompt: 'Find and photograph a pan or pot!' },
+  { answer: 'remote', prompt: 'Find and photograph a TV remote control!' },
+  { answer: 'phone', prompt: 'Find and photograph a mobile phone!' },
+  { answer: 'laptop', prompt: 'Find and photograph a laptop or computer!' },
+  { answer: 'headphones', prompt: 'Find and photograph headphones or earphones!' },
+  { answer: 'charger', prompt: 'Find and photograph a phone or laptop charger!' },
+  { answer: 'umbrella', prompt: 'Find and photograph an umbrella!' },
+  { answer: 'blanket', prompt: 'Find and photograph a blanket!' },
+  { answer: 'candle', prompt: 'Find and photograph a candle!' },
+  { answer: 'frame', prompt: 'Find and photograph a picture frame!' },
+  { answer: 'calendar', prompt: 'Find and photograph a calendar!' },
+  { answer: 'notebook', prompt: 'Find and photograph a notebook!' },
+  { answer: 'pencil', prompt: 'Find and photograph a pencil!' },
+  { answer: 'ruler', prompt: 'Find and photograph a ruler!' },
+  { answer: 'eraser', prompt: 'Find and photograph an eraser!' },
+  { answer: 'wallet', prompt: 'Find and photograph a wallet or purse!' },
+  { answer: 'sunglasses', prompt: 'Find and photograph a pair of sunglasses!' },
+  { answer: 'watch', prompt: 'Find and photograph a wristwatch!' },
+  { answer: 'sock', prompt: 'Find and photograph a sock!' },
+  { answer: 'shirt', prompt: 'Find and photograph a shirt!' },
+  { answer: 'jacket', prompt: 'Find and photograph a jacket or coat!' },
+  { answer: 'belt', prompt: 'Find and photograph a belt!' },
+  { answer: 'scarf', prompt: 'Find and photograph a scarf!' },
+  { answer: 'glove', prompt: 'Find and photograph a glove!' },
+  { answer: 'orange', prompt: 'Find and photograph an orange!' },
+  { answer: 'lemon', prompt: 'Find and photograph a lemon!' },
+  { answer: 'onion', prompt: 'Find and photograph an onion!' },
+  { answer: 'potato', prompt: 'Find and photograph a potato!' },
+  { answer: 'tomato', prompt: 'Find and photograph a tomato!' },
+  { answer: 'carrot', prompt: 'Find and photograph a carrot!' },
+  { answer: 'bread', prompt: 'Find and photograph a loaf or slice of bread!' },
+  { answer: 'egg', prompt: 'Find and photograph an egg!' },
+  { answer: 'strawberry', prompt: 'Find and photograph a strawberry!' },
+  { answer: 'coin', prompt: 'Find and photograph a coin!' },
+  { answer: 'envelope', prompt: 'Find and photograph an envelope!' },
+  { answer: 'tape', prompt: 'Find and photograph a roll of tape!' },
+  { answer: 'stapler', prompt: 'Find and photograph a stapler!' },
+  { answer: 'flashlight', prompt: 'Find and photograph a flashlight or torch!' },
+  { answer: 'battery', prompt: 'Find and photograph a battery!' },
+  { answer: 'speaker', prompt: 'Find and photograph a speaker!' },
+  { answer: 'keyboard', prompt: 'Find and photograph a keyboard!' },
+  { answer: 'mouse', prompt: 'Find and photograph a computer mouse!' },
+  { answer: 'calculator', prompt: 'Find and photograph a calculator!' },
+  { answer: 'toothpaste', prompt: 'Find and photograph a tube of toothpaste!' },
+  { answer: 'shampoo', prompt: 'Find and photograph a bottle of shampoo!' },
+  { answer: 'sponge', prompt: 'Find and photograph a sponge!' },
+  { answer: 'brush', prompt: 'Find and photograph a paintbrush or toothbrush!' },
+  { answer: 'mat', prompt: 'Find and photograph a mat or rug!' },
+  { answer: 'curtain', prompt: 'Find and photograph a curtain!' },
+  { answer: 'shelf', prompt: 'Find and photograph a shelf!' },
+  { answer: 'drawer', prompt: 'Find and photograph a drawer!' },
+  { answer: 'hanger', prompt: 'Find and photograph a clothes hanger!' },
+  { answer: 'bin', prompt: 'Find and photograph a bin or trash can!' },
+  { answer: 'fan', prompt: 'Find and photograph a fan!' },
+  { answer: 'map', prompt: 'Find and photograph a map!' },
+  { answer: 'magazine', prompt: 'Find and photograph a magazine!' },
+  { answer: 'sticker', prompt: 'Find and photograph a sticker!' },
+  { answer: 'toy', prompt: 'Find and photograph a toy!' },
+  { answer: 'puzzle', prompt: 'Find and photograph a puzzle or puzzle piece!' },
+  { answer: 'dice', prompt: 'Find and photograph a dice!' },
+  { answer: 'marker', prompt: 'Find and photograph a marker or highlighter!' },
+  { answer: 'stamp', prompt: 'Find and photograph a stamp!' },
+  { answer: 'paperclip', prompt: 'Find and photograph a paper clip!' },
+  { answer: 'rubber band', prompt: 'Find and photograph a rubber band!' },
+  { answer: 'leaf', prompt: 'Find and photograph a leaf!' },
+  { answer: 'stone', prompt: 'Find and photograph a stone or pebble!' },
+  { answer: 'feather', prompt: 'Find and photograph a feather!' },
+  { answer: 'flower', prompt: 'Find and photograph a flower!' },
+];
+
+const logoQuizBrands = [
+  { name: 'YouTube', slug: 'youtube' },
+  { name: 'Netflix', slug: 'netflix' },
+  { name: 'Spotify', slug: 'spotify' },
+  { name: 'Google', slug: 'google' },
+  { name: 'Apple', slug: 'apple' },
+  { name: 'Amazon', slug: 'amazon' },
+  { name: 'Instagram', slug: 'instagram' },
+  { name: 'WhatsApp', slug: 'whatsapp' },
+  { name: 'TikTok', slug: 'tiktok' },
+  { name: 'Snapchat', slug: 'snapchat' },
+  { name: 'Twitch', slug: 'twitch' },
+  { name: 'Discord', slug: 'discord' },
+  { name: 'Roblox', slug: 'roblox' },
+  { name: 'Steam', slug: 'steam' },
+  { name: 'Nintendo', slug: 'nintendo' },
+  { name: 'PlayStation', slug: 'playstation' },
+  { name: 'Xbox', slug: 'xbox' },
+  { name: 'Zoom', slug: 'zoom' },
+  { name: "McDonald's", slug: 'mcdonalds' },
+  { name: 'LEGO', slug: 'lego' },
+  { name: 'NASA', slug: 'nasa' },
+  { name: 'Coca-Cola', slug: 'cocacola' },
+  { name: 'Microsoft', slug: 'microsoft' },
+  { name: 'Samsung', slug: 'samsung' },
+  { name: 'Facebook', slug: 'facebook' },
+  { name: 'X', slug: 'x' },
+  { name: 'Reddit', slug: 'reddit' },
+  { name: 'Pinterest', slug: 'pinterest' },
+  { name: 'LinkedIn', slug: 'linkedin' },
+  { name: 'PayPal', slug: 'paypal' },
+  { name: 'Visa', slug: 'visa' },
+  { name: 'Uber', slug: 'uber' },
+  { name: 'Airbnb', slug: 'airbnb' },
+  { name: 'Starbucks', slug: 'starbucks' },
+  { name: 'KFC', slug: 'kfc' },
+  { name: 'Burger King', slug: 'burgerking' },
+  { name: 'Pepsi', slug: 'pepsi' },
+  { name: 'Nike', slug: 'nike' },
+  { name: 'Adidas', slug: 'adidas' },
+  { name: 'Slack', slug: 'slack' },
+  { name: 'Figma', slug: 'figma' },
+  { name: 'Dropbox', slug: 'dropbox' },
+  { name: 'Disney+', slug: 'disneyplus' },
+  { name: 'Sony', slug: 'sony' },
+  { name: 'Adobe', slug: 'adobe' },
+  { name: 'Shopify', slug: 'shopify' },
+  { name: 'Stripe', slug: 'stripe' },
+  { name: 'Canva', slug: 'canva' },
 ];
 
 function normalizeText(value) {
   return String(value || '').trim().toLowerCase().replace(/\s+/g, ' ');
+}
+
+function normalizeForLogo(s) {
+  return String(s || '').toLowerCase().replace(/[^a-z0-9]/g, '');
 }
 
 function shuffleArray(items) {
@@ -188,6 +323,13 @@ function App() {
   const [photoStartTime, setPhotoStartTime] = useState(0);
   const [photoTimer, setPhotoTimer] = useState(0);
   const [photoElapsed, setPhotoElapsed] = useState(0);
+  const [logoRound, setLogoRound] = useState([]);
+  const [logoRoundIndex, setLogoRoundIndex] = useState(0);
+  const [logoGuess, setLogoGuess] = useState('');
+  const [logoFeedback, setLogoFeedback] = useState(null);
+  const [logoScore, setLogoScore] = useState(0);
+  const [logoGuesserState, setLogoGuesserState] = useState('playing');
+
   const pronunciationIndexRef = useRef(pronunciationIndex);
   const roundWordsRef = useRef(roundWords);
   const recognitionRef = useRef(null);
@@ -612,6 +754,60 @@ function App() {
     }
   };
 
+  const startLogoGuesser = () => {
+    const round = shuffleArray(logoQuizBrands).slice(0, 8);
+    setLogoRound(round);
+    setLogoRoundIndex(0);
+    setLogoGuess('');
+    setLogoFeedback(null);
+    setLogoScore(0);
+    setLogoHint(null);
+    setLogoHintLoading(false);
+    setLogoGuesserState('playing');
+    setView('logoGuesser');
+  };
+
+  const submitLogoGuess = () => {
+    const current = logoRound[logoRoundIndex];
+    if (!current || !logoGuess.trim()) return;
+    const isCorrect = normalizeForLogo(logoGuess) === normalizeForLogo(current.name);
+    if (isCorrect) setLogoScore((prev) => prev + 1);
+    setLogoFeedback(isCorrect ? 'correct' : 'wrong');
+  };
+
+  const nextLogo = () => {
+    const next = logoRoundIndex + 1;
+    if (next >= logoRound.length) {
+      setLogoGuesserState('done');
+    } else {
+      setLogoRoundIndex(next);
+      setLogoGuess('');
+      setLogoFeedback(null);
+      setLogoHint(null);
+      setLogoHintLoading(false);
+    }
+  };
+
+  const fetchLogoHint = async () => {
+    const current = logoRound[logoRoundIndex];
+    if (!current) return;
+    setLogoHintLoading(true);
+    try {
+      const res = await fetch(`${API_URL}/api/foundry/logo-hint`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ brandName: current.name }),
+      }).catch(() => { throw new Error('Cannot reach the server.'); });
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.error || 'Failed to get hint.');
+      setLogoHint(data.hint);
+    } catch {
+      setLogoHint('Hint not available right now.');
+    } finally {
+      setLogoHintLoading(false);
+    }
+  };
+
   const resetFlow = () => {
     setView('home');
     setSelectedExam(null);
@@ -676,14 +872,9 @@ function App() {
           <p className="eyebrow">Kids</p>
           <h2>Fun learning for children</h2>
         </div>
-        <button className="secondary-btn" onClick={resetFlow}>Back home</button>
+        <button className="secondary-btn" onClick={resetFlow}>Back</button>
       </div>
       <div className="exam-grid">
-        <div className="exam-card">
-          <h3>Kids quiz</h3>
-          <p>Answer simple riddles with your own words.</p>
-          <button className="primary-btn" onClick={startKidsQuiz}>Start quiz</button>
-        </div>
         <div className="exam-card">
           <h3>Pronunciation obstacle game</h3>
           <p>Say the English word clearly to clear each obstacle.</p>
@@ -700,6 +891,12 @@ function App() {
           <h3>Photo Challenge</h3>
           <p>Find an everyday object, snap a photo, and let AI check if you got it right!</p>
           <button className="primary-btn" onClick={startPhotoRound}>Start photo quiz</button>
+        </div>
+        <div className="exam-card foundry-card">
+          <div className="foundry-badge">✦ Foundry IQ</div>
+          <h3>Logo Guesser</h3>
+          <p>Look at a brand icon and guess the name. Get AI hints if you're stuck!</p>
+          <button className="primary-btn" onClick={startLogoGuesser}>Play logo quiz</button>
         </div>
       </div>
     </section>
@@ -889,6 +1086,97 @@ function App() {
     );
   };
 
+  const renderLogoGuesser = () => {
+    const current = logoRound[logoRoundIndex];
+    return (
+      <section className="card">
+        <div className="page-topbar">
+          <div>
+            <p className="eyebrow">Kids • Logo Guesser</p>
+            <h2>Can you name this logo?</h2>
+          </div>
+          <button className="secondary-btn" onClick={() => setView('kids')}>Back</button>
+        </div>
+        <div className="foundry-badge" style={{ marginBottom: 16 }}>✦ Foundry IQ</div>
+
+        {logoGuesserState === 'done' ? (
+          <div className="game-celebration">
+            <span className="celebration-emoji">🏆</span>
+            <h2>Nice job!</h2>
+            <p>You got <strong>{logoScore} of {logoRound.length}</strong> logos right.</p>
+            <div className="actions">
+              <button className="primary-btn" onClick={startLogoGuesser}>Play again</button>
+              <button className="secondary-btn" onClick={() => setView('kids')}>Back</button>
+            </div>
+          </div>
+        ) : (
+          <div className="game-card">
+            <div className="game-banner">
+              <h3>Logo {logoRoundIndex + 1} of {logoRound.length}</h3>
+              <span className="attempt-badge" style={{ background: 'rgba(69,211,191,0.12)', color: '#45d3bf', borderColor: 'rgba(69,211,191,0.3)' }}>
+                {logoScore} correct
+              </span>
+            </div>
+            <div className="game-main">
+              <div className="logo-display-card">
+                <img
+                  src={`https://cdn.simpleicons.org/${current?.slug}`}
+                  alt="Brand logo"
+                  className="logo-img"
+                  onError={(e) => { e.currentTarget.style.display = 'none'; }}
+                />
+              </div>
+
+              {logoFeedback === null ? (
+                <>
+                  {logoHintLoading && (
+                    <div className="foundry-loading" style={{ padding: '12px 0' }}>
+                      <div className="foundry-spinner" />
+                      <p className="small">Getting a hint...</p>
+                    </div>
+                  )}
+                  {logoHint && (
+                    <div className="logo-hint-box">
+                      <p className="small" style={{ margin: 0 }}>💡 {logoHint}</p>
+                    </div>
+                  )}
+                  <div className="form-group" style={{ marginTop: 16 }}>
+                    <label>What brand is this?</label>
+                    <input
+                      type="text"
+                      value={logoGuess}
+                      onChange={(e) => setLogoGuess(e.target.value)}
+                      onKeyDown={(e) => e.key === 'Enter' && logoGuess.trim() && submitLogoGuess()}
+                      placeholder="Type the brand name..."
+                      autoFocus
+                    />
+                  </div>
+                  <div className="actions">
+                    <button className="primary-btn" onClick={submitLogoGuess} disabled={!logoGuess.trim()}>Guess!</button>
+                    {!logoHint && !logoHintLoading && (
+                      <button className="secondary-btn" onClick={fetchLogoHint}>Give me a hint</button>
+                    )}
+                  </div>
+                </>
+              ) : (
+                <div style={{ marginTop: 16 }}>
+                  <p className={logoFeedback === 'correct' ? 'success' : 'warning'} style={{ fontSize: '1.1rem', marginBottom: 8 }}>
+                    {logoFeedback === 'correct' ? `✓ Correct! It's ${current?.name}!` : `✗ It was ${current?.name}`}
+                  </p>
+                  <div className="actions">
+                    <button className="primary-btn" onClick={nextLogo}>
+                      {logoRoundIndex < logoRound.length - 1 ? 'Next logo' : 'See results'}
+                    </button>
+                  </div>
+                </div>
+              )}
+            </div>
+          </div>
+        )}
+      </section>
+    );
+  };
+
   const renderQuiz = () => (
     <section className="card">
       <div className="exam-topbar">
@@ -896,10 +1184,7 @@ function App() {
           <p className="eyebrow">{selectedExam.toUpperCase()}</p>
           <h2>{questions[currentQuestion]?.prompt}</h2>
         </div>
-        <div className="actions">
-          {selectedExam === 'kids' && <button className="secondary-btn" onClick={resetFlow}>Back home</button>}
-          <p>{currentQuestion + 1}/{questions.length}</p>
-        </div>
+        <p>{currentQuestion + 1}/{questions.length}</p>
       </div>
       {questions[currentQuestion]?.type === 'text' || selectedExam === 'kids' ? (
         <div className="form-group">
@@ -921,12 +1206,12 @@ function App() {
         </div>
       )}
       <div className="actions">
+        <button className="secondary-btn" onClick={() => setView('exams')}>Back</button>
         <button className="secondary-btn" disabled={currentQuestion === 0} onClick={() => setCurrentQuestion((prev) => prev - 1)}>Previous</button>
-        {currentQuestion < questions.length - 1 ? (
+        {currentQuestion < questions.length - 1 && (
           <button className="primary-btn" onClick={() => setCurrentQuestion((prev) => prev + 1)}>Next</button>
-        ) : (
-          <button className="primary-btn" onClick={submitExam}>Submit</button>
         )}
+        <button className="primary-btn" onClick={submitExam}>Submit</button>
       </div>
     </section>
   );
@@ -963,7 +1248,7 @@ function App() {
           <p className="eyebrow">Kids • Voice game</p>
           <h2>Pronunciation obstacle course</h2>
         </div>
-        <button className="secondary-btn" onClick={resetFlow}>Back home</button>
+        <button className="secondary-btn" onClick={() => setView('kids')}>Back</button>
       </div>
       {gameCompleted ? (
         <div className="game-celebration">
@@ -1041,6 +1326,7 @@ function App() {
       {view === 'pronunciationGame' && renderPronunciationGame()}
       {view === 'foundryRiddle' && renderFoundryRiddle()}
       {view === 'photoQuiz' && renderPhotoQuiz()}
+      {view === 'logoGuesser' && renderLogoGuesser()}
     </div>
   );
 }

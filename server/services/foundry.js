@@ -58,6 +58,30 @@ Respond with valid JSON only — no extra text:
   return JSON.parse(jsonMatch[0]);
 }
 
+export async function generateLogoHint(brandName) {
+  const client = getClient();
+  if (!client) throw new Error('GitHub token not configured. Add GITHUB_TOKEN to server/.env');
+
+  const completion = await client.chat.completions.create({
+    model: 'gpt-4o-mini',
+    messages: [
+      {
+        role: 'system',
+        content: `You give child-friendly hints about a brand's logo without naming the brand.
+Describe the logo's colors, shape or symbol, and what the company does in 2-3 short sentences.
+Never say the brand name. Keep it fun and simple for kids aged 5-12.
+Respond with JSON only: { "hint": "..." }`,
+      },
+      { role: 'user', content: `Give a hint for the brand: ${brandName}` },
+    ],
+    max_tokens: 150,
+    response_format: { type: 'json_object' },
+  });
+
+  const parsed = JSON.parse(completion.choices[0].message.content);
+  return parsed.hint;
+}
+
 export async function generateRiddle(topic = 'everyday objects') {
   const client = getClient();
   if (!client) throw new Error('GitHub token not configured. Add GITHUB_TOKEN to server/.env');

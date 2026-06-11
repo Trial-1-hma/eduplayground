@@ -4,7 +4,7 @@ import dotenv from 'dotenv';
 import bcrypt from 'bcryptjs';
 import { Pool } from 'pg';
 import { questionTemplates } from './data/questions.js';
-import { isFoundryConfigured, generateRiddle, randomTopic, classifyImage } from './services/foundry.js';
+import { isFoundryConfigured, generateRiddle, randomTopic, classifyImage, generateLogoHint } from './services/foundry.js';
 
 dotenv.config();
 
@@ -107,6 +107,20 @@ app.post('/api/foundry/classify', async (req, res) => {
   } catch (err) {
     console.error('classifyImage error:', err.message);
     res.status(500).json({ error: 'Image classification failed. Please try again.' });
+  }
+});
+
+app.post('/api/foundry/logo-hint', async (req, res) => {
+  if (!isFoundryConfigured()) {
+    return res.status(503).json({ error: 'Foundry IQ is not configured. Add GITHUB_TOKEN to server/.env' });
+  }
+  const { brandName } = req.body;
+  if (!brandName) return res.status(400).json({ error: 'brandName is required.' });
+  try {
+    const hint = await generateLogoHint(brandName);
+    res.json({ hint });
+  } catch (err) {
+    res.status(500).json({ error: 'Failed to generate hint. Please try again.' });
   }
 });
 

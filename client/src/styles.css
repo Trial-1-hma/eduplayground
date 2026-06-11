@@ -109,3 +109,11 @@ code { background: rgba(255,255,255,0.08); padding: 2px 6px; border-radius: 4px;
 .photo-verdict-wrong { border-color: rgba(255,123,123,0.4); background: rgba(255,123,123,0.1); }
 .photo-verdict-emoji { font-size: 1.6rem; flex-shrink: 0; line-height: 1; }
 .photo-verdict-text { font-size: 1.05rem; font-weight: 600; margin: 0 0 4px; }
+
+/* ── Logo Guesser ───────────────────────────────── */
+.logo-display-card { background: #111827; border: 2px solid rgba(255,255,255,0.18); border-radius: 20px; display: flex; align-items: center; justify-content: center; padding: 36px; margin: 16px auto; max-width: 240px; box-shadow: 0 4px 32px rgba(0,0,0,0.6); }
+.logo-img { width: 120px; height: 120px; object-fit: contain; display: block; filter: brightness(0) invert(1); }
+
+
+
+
