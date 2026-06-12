@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import Home from './components/Home';
+import WorldMap from './components/WorldMap';
 import ExamList from './components/ExamList';
 import KidsMenu from './components/KidsMenu';
 import Quiz from './components/Quiz';
@@ -24,7 +24,7 @@ function App() {
 
   return (
     <div className="app-shell">
-      {view === 'home' && <Home onNavigate={setView} />}
+      {view === 'home' && <WorldMap onNavigate={setView} />}
       {view === 'exams' && <ExamList onStartExam={startExam} onBack={() => setView('home')} />}
       {view === 'kids' && <KidsMenu onNavigate={setView} onBack={() => setView('home')} />}
       {view === 'quiz' && (
