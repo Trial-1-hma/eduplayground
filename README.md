@@ -1,43 +1,112 @@
-# Agent League — AI-Powered Learning Platform
+# Agent League — AI-Powered Learning & Creativity World
 
 > **Microsoft Agents League @ AISF 2026 — Battle #1: Creative Apps with GitHub Copilot**
 > Submitted by Htet-Myark · License: MIT
 
-An interactive education platform that combines real certification exam practice with four AI-powered kids learning games — no account required, works instantly in the browser.
+A gamified learning platform set on an explorable **3D island**. Walk your character to a building and step inside: certification exam practice, an AI bedtime storyteller that reads aloud with a neural voice, 3-minute AI movie recaps, real-time multiplayer word battles across devices, a song-guessing game, sleep sounds, and a full kids section — no account required, works instantly in the browser.
+
+---
+
+## 🗺️ The 3D World
+
+The landing page is a low-poly 3D island built with **Three.js / react-three-fiber** — every feature is a building you walk to:
+
+| Station | Feature |
+|---|---|
+| 📚 Exam Academy | Certification exam practice |
+| 🌙 Sleep Cabin | Generated ambient sleep sounds |
+| 🎬 Recap Cinema | 3-minute AI movie recaps |
+| 🎤 Karaoke Stage | Blind Karaoke song-guessing game |
+| 🎈 Kids Playground | Kids games and the bedtime storyteller |
+
+- **Desktop**: WASD / arrow keys to walk, Space to jump, Enter to enter a glowing station
+- **Mobile**: virtual joystick + jump button, or tap anywhere to walk there
+- **Physics**: solid collision on trees, rocks, and buildings (slide along edges); rocks are low enough to jump over
+- Exiting a feature respawns your character in front of the building you entered
 
 ---
 
 ## Features
 
-### Exams
-Practice real certification questions with 50 randomised questions per session. Submit at any point mid-exam, or finish all questions — a full answer review with explanations is shown after every submission.
+### 📚 Exams
+50 randomised questions per session with full answer review and explanations: **AWS Cloud Practitioner · Azure Fundamentals · Kubernetes Basics · Docker Essentials**.
 
-| Exam | Topics Covered |
+### 🌙 Sleep Sounds (Adults)
+Five looping ambient sounds — rain, ocean waves, white noise, deep rumble, fan hum — **synthesized live in the browser with the Web Audio API** (no audio files: filtered pink/brown noise, LFO wave swells). Volume control and an auto-stop sleep timer (15/30/60 min) with live countdown.
+
+### 🎬 3-Minute Movie Recap ✦ Foundry IQ
+Type any movie title → the AI writes a ~3-minute spoken recap in **simple/intermediate English (CEFR A2-B1)** for language learners, then reads it aloud with a neural narrator voice. Every recap shows a **confidence badge** (high / medium / low) — the model rates how well it actually knows the film, an explicit anti-hallucination signal. Unknown titles are declined rather than invented.
+
+### 🎤 Blind Karaoke
+Hear a **10-second clip** of a popular song (official iTunes previews — ~75 well-known songs across decades) and guess the title. 5 rounds, a running ⏱ timer, and a **persistent best record** (score + time). The answer never leaves the server until you guess right or give up — no cheating via dev tools.
+
+### ⚔️ Word Battle — Real-Time Multiplayer (different devices!)
+Battle a friend over **WebSockets**: create a room, share the 4-letter code, and your friend joins from their own device on the same Wi-Fi (the waiting room shows the exact URL to open). Answer word clues to deal damage — first to knock the opponent's 100 HP to zero wins. Server-authoritative game logic, rematch handshake, and disconnect handling.
+
+### 🎈 Kids Section
+| Game | What it does |
 |---|---|
-| AWS Cloud Practitioner | EC2, S3, IAM, pricing, architecture |
-| Azure Fundamentals | Core services, governance, security |
-| Kubernetes Basics | Pods, deployments, services, networking |
-| Docker Essentials | Containers, images, networking, volumes |
+| **Pronunciation Obstacle Course** | Say words aloud to clear obstacles — Web Speech API, 112-word pool |
+| **AI Riddle Challenge** ✦ Foundry IQ | Fresh riddle every play, any topic, with child-friendly explanation |
+| **Photo Challenge** ✦ Foundry IQ Vision | "Find and photograph a mirror" → camera snap → vision model verdict + confidence |
+| **Logo Guesser** | Name the brand from its icon, alias-aware matching |
+| **Bedtime Story Teller** ✦ Foundry IQ | Answer 5 personality questions → AI writes a ~10-minute bedtime story → **read aloud paragraph-by-paragraph with a neural voice**, live highlight following the narration |
 
-### Kids Section — Four AI-Powered Games
+---
 
-#### Pronunciation Obstacle Course
-A 10-word voice game powered by the Web Speech API. The browser listens continuously — say the word shown on screen clearly to clear the obstacle and move the runner forward. Skip after 3 wrong attempts. Words are drawn from a 112-word pool, shuffled each round.
+## Architecture
 
-#### AI Riddle Challenge ✦ Foundry IQ
-Fresh riddles generated live by **Azure AI Foundry** on every play. Pick any topic — animals, space, food, weather — and the model produces a unique riddle with an answer and child-friendly explanation. Never the same puzzle twice.
+```mermaid
+flowchart TB
+    subgraph Client["React + Vite frontend"]
+        World["3D World (three.js / r3f)"]
+        Views["Feature views (one component per game)"]
+        Hook["useReadAloud hook<br/>(chunked audio, prefetch, fallback)"]
+    end
 
-#### Photo Challenge ✦ Foundry IQ Vision
-The game gives a challenge (e.g. *"Find and photograph a mirror"*). The player uses their device camera to snap a photo, which is sent to **gpt-4o-mini vision** via Foundry IQ. The model decides whether the object in the photo matches the challenge, returning a match result and confidence level.
+    subgraph Server["Node.js + Express (port 5000)"]
+        Foundry["services/foundry.js<br/>riddle · vision · story · recap"]
+        TTS["services/tts.js<br/>neural speech (MP3)"]
+        Battle["services/battle.js<br/>WebSocket rooms"]
+        Karaoke["services/karaoke.js<br/>rounds + answer checking"]
+    end
 
-#### Logo Guesser ✦ Foundry IQ
-50 real brand logos displayed as icons. Kids type the brand name to score a point. Common shortcuts are accepted — `snap`, `insta`, `chrome`, `coke`, `twitter`, `ps`, `yt` all count as correct answers. Logos are drawn from a verified pool and shuffled 8 per round.
+    subgraph IQ["Microsoft Foundry IQ"]
+        Models["Azure AI Foundry — GitHub Models<br/>gpt-4o-mini (text + vision)"]
+    end
+
+    MCP["MCP server (mcp/server.js)<br/>4 tools for GitHub Copilot Chat"]
+    Edge["Microsoft Edge neural voices"]
+    Itunes["iTunes Search API<br/>(official 30s previews)"]
+
+    World --> Views
+    Views -->|REST| Foundry
+    Hook -->|POST /api/tts| TTS
+    Views <-->|ws://.../ws/battle| Battle
+    Views -->|REST| Karaoke
+    Foundry --> Models
+    MCP --> Models
+    TTS --> Edge
+    Karaoke --> Itunes
+```
+
+### Tech Stack
+
+| Layer | Technology |
+|---|---|
+| Frontend | React 18, Vite, Three.js + @react-three/fiber + drei |
+| Backend | Node.js, Express, `ws` WebSockets |
+| AI | **Foundry IQ** — Azure AI Foundry via GitHub Models, `gpt-4o-mini` text + vision |
+| Speech out | `msedge-tts` neural voices (server-side MP3) + browser speechSynthesis fallback |
+| Speech in | Web Speech API (pronunciation game) |
+| Generated audio | Web Audio API (sleep sounds — no audio assets) |
+| MCP | `@modelcontextprotocol/sdk` |
 
 ---
 
 ## Microsoft Foundry IQ Integration
 
-All AI features connect to **Foundry IQ** — Azure AI Foundry accessed via the GitHub Models endpoint — through a single shared client in `server/services/foundry.js`.
+All AI features connect to **Foundry IQ** (Azure AI Foundry via the GitHub Models endpoint) through one shared client in `server/services/foundry.js`:
 
 ```js
 const client = new OpenAI({
@@ -46,100 +115,50 @@ const client = new OpenAI({
 });
 ```
 
-### Three distinct AI capabilities
-
 | Endpoint | Model | What it does |
 |---|---|---|
-| `POST /api/foundry/riddle` | `gpt-4o-mini` | Generates a structured riddle (prompt, answer, explanation) on a given topic |
-| `POST /api/foundry/classify` | `gpt-4o-mini` (vision) | Classifies a base64 camera image against an expected object — returns match + confidence |
-| `POST /api/foundry/logo-hint` | `gpt-4o-mini` | Describes a brand logo visually without naming the brand, for use as an in-game hint |
+| `POST /api/foundry/riddle` | `gpt-4o-mini` | Structured riddle (prompt, answer, explanation) on a topic |
+| `POST /api/foundry/classify` | `gpt-4o-mini` vision | Classifies a camera photo against an expected object — match + confidence |
+| `POST /api/foundry/story` | `gpt-4o-mini` | **Two-call pipeline**: writes a bedtime story in halves so it reliably reaches ~10 read-aloud minutes |
+| `POST /api/foundry/recap` | `gpt-4o-mini` | Movie recap in learner-level English with a self-rated **confidence level** |
+| `POST /api/foundry/logo-hint` | `gpt-4o-mini` | Describes a logo without naming the brand |
 
-All non-AI features (exams, pronunciation game) work without a token configured.
+Grounding & anti-hallucination measures: riddles return a cited `source`; recaps self-rate confidence and refuse unknown titles (`known: false`); the vision classifier returns calibrated confidence. All non-AI features work without a token configured.
+
+---
+
+## Reasoning & Multi-Step Pipelines
+
+- **Bedtime story generation** is a two-call conversation: the model writes the first 8 paragraphs, receives its own output back, and continues to a sleepy ending — single calls consistently undershot the 10-minute target, so generation is split and stitched.
+- **Read-aloud** is a streaming pipeline: each paragraph is synthesized to MP3 on the server, played in order while the *next* paragraph is prefetched, cached for instant replay, with automatic fallback to the browser's built-in voice if the neural endpoint fails.
+- **Photo Challenge** chains camera capture → canvas JPEG encode → base64 upload → vision classification → structured verdict.
+- **Word Battle** keeps all game state server-side: the server picks words, validates answers, applies damage, and broadcasts state — clients only render.
+- **Blind Karaoke** rounds are server-side sessions with TTL: the browser receives only a preview URL and a round ID; guesses are normalized and matched server-side (case, punctuation, "feat." suffixes).
+
+---
+
+## Reliability & Safety
+
+- **Secrets**: `GITHUB_TOKEN` lives in `server/.env` (gitignored, never committed — verified against full git history); all AI calls are server-side; the client never sees the token
+- **Input validation**: TTS voice/rate whitelisted server-side; text length caps; karaoke/battle answers validated server-side so clients can't cheat
+- **Graceful degradation**: neural TTS falls back to browser speechSynthesis; DB falls back to in-memory store; AI features show friendly setup hints when unconfigured; every fetch has explicit error states
+- **Kids-safe generation**: story and riddle prompts enforce age-appropriate, gentle content (no scary moments, calm endings)
+- **Resource cleanup**: camera, microphone, audio contexts, and WebSockets are all torn down on navigation
 
 ---
 
 ## MCP Server — GitHub Copilot Integration
 
-Agent League ships an **MCP (Model Context Protocol) server** that connects the platform's Foundry IQ features directly into GitHub Copilot Chat inside VS Code.
+Agent League ships an **MCP server** that connects its Foundry IQ features directly into GitHub Copilot Chat in VS Code, registered automatically via `.vscode/mcp.json`:
 
-### Tools exposed to Copilot
-
-| Tool | What you can ask |
+| Tool | Ask Copilot |
 |---|---|
 | `generate_riddle` | *"Generate a riddle about space"* |
 | `generate_logo_hint` | *"Give me a logo hint for Nike"* |
 | `list_exams` | *"What exams are available?"* |
 | `foundry_status` | *"Is Foundry IQ configured?"* |
 
-### How it works
-
-The `.vscode/mcp.json` file registers the MCP server automatically when the project is opened in VS Code:
-
-```json
-{
-  "servers": {
-    "agent-league": {
-      "type": "stdio",
-      "command": "node",
-      "args": ["${workspaceFolder}/mcp/server.js"]
-    }
-  }
-}
-```
-
-Copilot Chat can then call Foundry IQ tools without leaving the editor.
-
----
-
-## Architecture
-
-```
-┌───────────────────────────────────────────────────┐
-│                React Frontend (Vite)               │
-│                                                    │
-│  ┌──────────┐ ┌──────────┐ ┌─────────┐ ┌───────┐ │
-│  │  Exams   │ │ Voice    │ │ Photo   │ │ Logo  │ │
-│  │  (4 tracks)│ │ Game    │ │Challenge│ │Guesser│ │
-│  └────┬─────┘ └────┬─────┘ └────┬────┘ └───┬───┘ │
-└───────┼────────────┼────────────┼───────────┼─────┘
-        │            │ Web        │ Camera    │ CDN
-        │ REST API   │ Speech API │ (base64)  │ icons
-┌───────▼────────────▼────────────▼───────────┘
-│           Node.js + Express Server            │
-│                                               │
-│  /api/exams/:id/questions                     │
-│  /api/foundry/riddle                          │
-│  /api/foundry/classify                        │
-│  /api/foundry/logo-hint                       │
-│                                               │
-│  server/services/foundry.js                   │
-│  ├── generateRiddle()                         │
-│  ├── classifyImage()                          │
-│  └── generateLogoHint()                       │
-└───────────────────┬───────────────────────────┘
-                    │ GITHUB_TOKEN
-┌───────────────────▼───────────────────────────┐
-│      Azure AI Foundry — Foundry IQ            │
-│      models.inference.ai.azure.com            │
-│      gpt-4o-mini  (text + vision)             │
-└───────────────────────────────────────────────┘
-
-┌───────────────────────────────────────────────┐
-│    MCP Server  (mcp/server.js)                │
-│    GitHub Copilot Chat ↔ Foundry IQ tools     │
-└───────────────────────────────────────────────┘
-```
-
-### Tech Stack
-
-| Layer | Technology |
-|---|---|
-| Frontend | React 18, Vite |
-| Backend | Node.js, Express |
-| AI | Azure AI Foundry (GitHub Models) — `gpt-4o-mini` text + vision |
-| MCP | `@modelcontextprotocol/sdk` |
-| Speech | Web Speech API (browser-native) |
-| Auth / DB | bcryptjs · PostgreSQL (optional, in-memory fallback) |
+Test from a terminal: `echo '{"jsonrpc":"2.0","id":1,"method":"tools/list","params":{}}' | node mcp/server.js`
 
 ---
 
@@ -160,42 +179,24 @@ GitHub Copilot was used throughout the development of this project:
 
 ### Prerequisites
 - Node.js 18+
-- A GitHub Personal Access Token (classic) with access to GitHub Models
+- A GitHub Personal Access Token (classic, no scopes) for GitHub Models — free accounts included
 
-### 1. Clone and install
+### Run it
 ```bash
 git clone <your-repo-url>
 cd agent-league
-npm install        # installs client, server, and mcp workspaces
-```
-
-### 2. Configure Foundry IQ
-```bash
-# Create server/.env
-echo "GITHUB_TOKEN=ghp_your_token_here" > server/.env
-```
-
-Get a token at [github.com/settings/tokens](https://github.com/settings/tokens). GitHub Models access is included on free accounts.
-
-### 3. Run
-```bash
+npm install                                  # installs client, server, and mcp workspaces
+echo "GITHUB_TOKEN=ghp_your_token" > server/.env
 npm run dev
 ```
 
 | Service | URL |
 |---|---|
-| Frontend | http://localhost:5173 |
-| Backend | http://localhost:5000 |
+| Frontend | http://localhost:3000 |
+| Backend + WebSocket | http://localhost:5000 |
 
-> Use Chrome or Edge for the Pronunciation Game — the Web Speech API requires a Chromium browser.
-
-### 4. MCP Server
-Open the project folder in VS Code with GitHub Copilot installed. The MCP server connects automatically via `.vscode/mcp.json`.
-
-To test the MCP server from the terminal:
-```bash
-echo '{"jsonrpc":"2.0","id":1,"method":"tools/list","params":{}}' | node mcp/server.js
-```
+> **Multiplayer across devices**: both devices on the same Wi-Fi — the Word Battle waiting room displays the exact `http://<your-ip>:3000` address for the second device. Allow Node.js through Windows Firewall when prompted.
+> **Browser**: use Chrome or Edge for the voice features (Web Speech API).
 
 ---
 
@@ -203,21 +204,29 @@ echo '{"jsonrpc":"2.0","id":1,"method":"tools/list","params":{}}' | node mcp/ser
 
 ```
 agent-league/
-├── client/                  # React + Vite frontend
+├── client/
 │   └── src/
-│       ├── App.jsx          # All views, game logic, state
-│       └── styles.css       # Dark-theme design system
-├── server/                  # Express.js API server
-│   ├── server.js            # Routes
+│       ├── App.jsx                  # View routing only
+│       ├── components/              # One component per feature
+│       │   ├── WorldMap.jsx         # 3D island, player physics, joystick
+│       │   ├── StoryTeller.jsx      # Bedtime story + read-aloud
+│       │   ├── MovieRecap.jsx       # Recaps + confidence badge
+│       │   ├── WordBattle.jsx       # Multiplayer over WebSocket
+│       │   ├── BlindKaraoke.jsx     # Song guessing + time record
+│       │   ├── SleepSounds.jsx      # Web Audio synthesis
+│       │   └── ...                  # Quiz, ExamList, KidsMenu, games
+│       ├── hooks/useReadAloud.js    # Shared neural TTS playback pipeline
+│       └── data/                    # Word lists, brands
+├── server/
+│   ├── server.js                    # REST routes + HTTP/WS server
 │   ├── services/
-│   │   └── foundry.js       # Foundry IQ client (riddle · vision · hint)
-│   └── data/
-│       └── questions.js     # Exam question bank (AWS · Azure · K8s · Docker)
-├── mcp/                     # MCP server for GitHub Copilot
-│   └── server.js
-├── .vscode/
-│   └── mcp.json             # Copilot MCP registration
-└── README.md
+│   │   ├── foundry.js               # Foundry IQ: riddle · vision · story · recap
+│   │   ├── tts.js                   # Neural speech synthesis
+│   │   ├── battle.js                # Multiplayer rooms (ws)
+│   │   └── karaoke.js               # Song rounds + guess matching
+│   └── data/                        # Exam questions, battle words
+├── mcp/server.js                    # MCP server for GitHub Copilot
+└── .vscode/mcp.json                 # Copilot MCP registration
 ```
 
 ---
@@ -226,23 +235,14 @@ agent-league/
 
 | Requirement | Status |
 |---|---|
-| Public GitHub repository | ✅ |
-| MIT License | ✅ |
-| README with architecture | ✅ |
+| Public GitHub repository + README | ✅ |
+| Architecture diagram | ✅ Mermaid diagram above |
 | GitHub Copilot usage documented | ✅ |
-| Microsoft IQ — Foundry IQ | ✅ Riddle generation · Vision classification · Logo hints |
-| MCP Server for Copilot | ✅ 4 tools registered via `.vscode/mcp.json` |
-| Creative application | ✅ AI-powered kids games + certification exam practice |
+| Microsoft IQ — **Foundry IQ** | ✅ 5 endpoints: riddles · vision · stories · recaps · hints |
+| MCP Server for Copilot | ✅ 4 tools via `.vscode/mcp.json` |
+| Creative application | ✅ Gamified 3D learning world |
+| Demo video (≤5 min, YouTube/Vimeo) | 🎬 *link here before submitting* |
 | Track | Battle #1 — Creative Apps |
-
----
-
-## Security
-
-- `GITHUB_TOKEN` is stored in `server/.env` and never sent to the client
-- `.env` is listed in `.gitignore`
-- No user data is logged or persisted beyond the session unless a database is configured
-- All Foundry IQ calls are made server-side
 
 ---
 
