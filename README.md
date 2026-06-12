@@ -34,7 +34,7 @@ The landing page is a low-poly 3D island built with **Three.js / react-three-fib
 ### Sleep Sounds (Adults)
 Five looping ambient sounds — rain, ocean waves, white noise, deep rumble, fan hum — **synthesized live in the browser with the Web Audio API** (no audio files: filtered pink/brown noise, LFO wave swells). Volume control and an auto-stop sleep timer (15/30/60 min) with live countdown.
 
-### 3-Minute Movie Recap ✦ Foundry IQ
+### 3-Minute Movie Recap  Foundry IQ
 Type any movie title → the AI writes a ~3-minute spoken recap in **simple/intermediate English (CEFR A2-B1)** for language learners, then reads it aloud with a neural narrator voice. Every recap shows a **confidence badge** (high / medium / low) — the model rates how well it actually knows the film, an explicit anti-hallucination signal. Unknown titles are declined rather than invented.
 
 ### Blind Karaoke
@@ -47,10 +47,10 @@ Battle a friend over **WebSockets**: create a room, share the 4-letter code, and
 | Game | What it does |
 |---|---|
 | **Pronunciation Obstacle Course** | Say words aloud to clear obstacles — Web Speech API, 112-word pool |
-| **AI Riddle Challenge** ✦ Foundry IQ | Fresh riddle every play, any topic, with child-friendly explanation |
-| **Photo Challenge** ✦ Foundry IQ Vision | "Find and photograph a mirror" → camera snap → vision model verdict + confidence |
+| **AI Riddle Challenge**  Foundry IQ | Fresh riddle every play, any topic, with child-friendly explanation |
+| **Photo Challenge**  Foundry IQ Vision | "Find and photograph a mirror" → camera snap → vision model verdict + confidence |
 | **Logo Guesser** | Name the brand from its icon, alias-aware matching |
-| **Bedtime Story Teller** ✦ Foundry IQ | Answer 5 personality questions → AI writes a ~10-minute bedtime story → **read aloud paragraph-by-paragraph with a neural voice**, live highlight following the narration |
+| **Bedtime Story Teller**  Foundry IQ | Answer 5 personality questions → AI writes a ~10-minute bedtime story → **read aloud paragraph-by-paragraph with a neural voice**, live highlight following the narration |
 
 ---
 
