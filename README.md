@@ -1,6 +1,3 @@
-<<<<<<< HEAD
-# creative-app
-=======
 # Agent League — AI-Powered Learning & Creativity World
 
 > **Microsoft Agents League @ AISF 2026 — Battle #1: Creative Apps with GitHub Copilot**
@@ -10,17 +7,17 @@ A gamified learning platform set on an explorable **3D island**. Walk your chara
 
 ---
 
-## 🗺️ The 3D World
+## The 3D World
 
 The landing page is a low-poly 3D island built with **Three.js / react-three-fiber** — every feature is a building you walk to:
 
 | Station | Feature |
 |---|---|
-| 📚 Exam Academy | Certification exam practice |
-| 🌙 Sleep Cabin | Generated ambient sleep sounds |
-| 🎬 Recap Cinema | 3-minute AI movie recaps |
-| 🎤 Karaoke Stage | Blind Karaoke song-guessing game |
-| 🎈 Kids Playground | Kids games and the bedtime storyteller |
+| Exam Academy | Certification exam practice |
+| Sleep Cabin | Generated ambient sleep sounds |
+| Recap Cinema | 3-minute AI movie recaps |
+| Karaoke Stage | Blind Karaoke song-guessing game |
+| Kids Playground | Kids games and the bedtime storyteller |
 
 - **Desktop**: WASD / arrow keys to walk, Space to jump, Enter to enter a glowing station
 - **Mobile**: virtual joystick + jump button, or tap anywhere to walk there
@@ -31,22 +28,22 @@ The landing page is a low-poly 3D island built with **Three.js / react-three-fib
 
 ## Features
 
-### 📚 Exams
+### Exams
 50 randomised questions per session with full answer review and explanations: **AWS Cloud Practitioner · Azure Fundamentals · Kubernetes Basics · Docker Essentials**.
 
-### 🌙 Sleep Sounds (Adults)
+### Sleep Sounds (Adults)
 Five looping ambient sounds — rain, ocean waves, white noise, deep rumble, fan hum — **synthesized live in the browser with the Web Audio API** (no audio files: filtered pink/brown noise, LFO wave swells). Volume control and an auto-stop sleep timer (15/30/60 min) with live countdown.
 
-### 🎬 3-Minute Movie Recap ✦ Foundry IQ
+### 3-Minute Movie Recap ✦ Foundry IQ
 Type any movie title → the AI writes a ~3-minute spoken recap in **simple/intermediate English (CEFR A2-B1)** for language learners, then reads it aloud with a neural narrator voice. Every recap shows a **confidence badge** (high / medium / low) — the model rates how well it actually knows the film, an explicit anti-hallucination signal. Unknown titles are declined rather than invented.
 
-### 🎤 Blind Karaoke
-Hear a **10-second clip** of a popular song (official iTunes previews — ~75 well-known songs across decades) and guess the title. 5 rounds, a running ⏱ timer, and a **persistent best record** (score + time). The answer never leaves the server until you guess right or give up — no cheating via dev tools.
+### Blind Karaoke
+Hear a **10-second clip** of a popular song (official iTunes previews — ~75 well-known songs across decades) and guess the title. 5 rounds, a running timer, and a **persistent best record** (score + time). The answer never leaves the server until you guess right or give up — no cheating via dev tools.
 
-### ⚔️ Word Battle — Real-Time Multiplayer (different devices!)
+### Word Battle — Real-Time Multiplayer (different devices!)
 Battle a friend over **WebSockets**: create a room, share the 4-letter code, and your friend joins from their own device on the same Wi-Fi (the waiting room shows the exact URL to open). Answer word clues to deal damage — first to knock the opponent's 100 HP to zero wins. Server-authoritative game logic, rematch handshake, and disconnect handling.
 
-### 🎈 Kids Section
+### Kids Section
 | Game | What it does |
 |---|---|
 | **Pronunciation Obstacle Course** | Say words aloud to clear obstacles — Web Speech API, 112-word pool |
@@ -238,13 +235,13 @@ agent-league/
 
 | Requirement | Status |
 |---|---|
-| Public GitHub repository + README | ✅ |
-| Architecture diagram | ✅ Mermaid diagram above |
-| GitHub Copilot usage documented | ✅ |
-| Microsoft IQ — **Foundry IQ** | ✅ 5 endpoints: riddles · vision · stories · recaps · hints |
-| MCP Server for Copilot | ✅ 4 tools via `.vscode/mcp.json` |
-| Creative application | ✅ Gamified 3D learning world |
-| Demo video (≤5 min, YouTube/Vimeo) |
+| Public GitHub repository + README | Yes |
+| Architecture diagram | Yes — Mermaid diagram above |
+| GitHub Copilot usage documented | Yes |
+| Microsoft IQ — **Foundry IQ** | Yes — 5 endpoints: riddles · vision · stories · recaps · hints |
+| MCP Server for Copilot | Yes — 4 tools via `.vscode/mcp.json` |
+| Creative application | Yes — gamified 3D learning world |
+| Demo video (max 5 min, YouTube/Vimeo) | Link to be added before submitting |
 | Track | Battle #1 — Creative Apps |
 
 ---
@@ -252,4 +249,3 @@ agent-league/
 ## License
 
 MIT — see [LICENSE](LICENSE) for full text.
->>>>>>> master
