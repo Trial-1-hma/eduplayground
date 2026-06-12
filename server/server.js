@@ -9,6 +9,7 @@ import { questionTemplates } from './data/questions.js';
 import { isFoundryConfigured, generateRiddle, randomTopic, classifyImage, generateLogoHint, generateBedtimeStory, generateMovieRecap } from './services/foundry.js';
 import { synthesizeSpeech } from './services/tts.js';
 import { setupBattleServer } from './services/battle.js';
+import { createKaraokeRound, checkKaraokeGuess, revealKaraokeRound } from './services/karaoke.js';
 
 dotenv.config();
 
@@ -143,6 +144,33 @@ app.post('/api/foundry/story', async (req, res) => {
     console.error('generateBedtimeStory error:', err.message);
     res.status(500).json({ error: 'Failed to generate the story. Please try again.' });
   }
+});
+
+app.post('/api/karaoke/round', async (req, res) => {
+  try {
+    const round = await createKaraokeRound(req.body?.excludeTitles || []);
+    res.json(round);
+  } catch (err) {
+    console.error('karaoke round error:', err.message);
+    res.status(500).json({ error: 'Could not load a song right now. Please try again.' });
+  }
+});
+
+app.post('/api/karaoke/guess', (req, res) => {
+  const { roundId, guess } = req.body || {};
+  if (!roundId || typeof guess !== 'string') {
+    return res.status(400).json({ error: 'roundId and guess are required.' });
+  }
+  const result = checkKaraokeGuess(roundId, guess);
+  if (!result) return res.status(404).json({ error: 'Round not found or expired.' });
+  res.json(result);
+});
+
+app.post('/api/karaoke/reveal', (req, res) => {
+  const { roundId } = req.body || {};
+  const reveal = revealKaraokeRound(roundId);
+  if (!reveal) return res.status(404).json({ error: 'Round not found or expired.' });
+  res.json(reveal);
 });
 
 app.get('/api/battle/info', (_req, res) => {

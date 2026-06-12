@@ -11,6 +11,7 @@ import SleepSounds from './components/SleepSounds';
 import StoryTeller from './components/StoryTeller';
 import WordBattle from './components/WordBattle';
 import MovieRecap from './components/MovieRecap';
+import BlindKaraoke from './components/BlindKaraoke';
 
 function App() {
   const [view, setView] = useState('home');
@@ -41,6 +42,7 @@ function App() {
       {view === 'storyTeller' && <StoryTeller onBack={() => setView('kids')} />}
       {view === 'wordBattle' && <WordBattle onBack={() => setView('kids')} />}
       {view === 'movieRecap' && <MovieRecap onBack={() => setView('home')} />}
+      {view === 'blindKaraoke' && <BlindKaraoke onBack={() => setView('home')} />}
     </div>
   );
 }

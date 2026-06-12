@@ -26,6 +26,12 @@ function Home({ onNavigate }) {
           <button className="primary-btn" onClick={() => onNavigate('movieRecap')}>Get a recap</button>
         </section>
         <section className="card path-card">
+          <div className="path-badge">Music</div>
+          <h2>Blind Karaoke song quiz</h2>
+          <p>Hear a 10-second clip of a popular song and guess its name. Race the clock for your best record!</p>
+          <button className="primary-btn" onClick={() => onNavigate('blindKaraoke')}>Play Blind Karaoke</button>
+        </section>
+        <section className="card path-card">
           <div className="path-badge">Kids</div>
           <h2>Play a kid-friendly quiz and voice game</h2>
           <p>Enjoy simple riddles and a pronunciation obstacle game that uses your voice.</p>

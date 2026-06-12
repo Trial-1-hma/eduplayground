@@ -161,6 +161,13 @@ input[type="range"] { padding: 0; background: transparent; border: none; accent-
 @keyframes battlePop { from { transform: scale(0.9); opacity: 0; } to { transform: scale(1); opacity: 1; } }
 @media (max-width: 600px) { .battle-arena { flex-direction: column; align-items: stretch; gap: 8px; } .battle-vs { text-align: center; } }
 
+/* ── Blind karaoke ───────────────────────────────── */
+.karaoke-stage { text-align: center; }
+.karaoke-disc { font-size: 4rem; display: inline-block; margin-bottom: 10px; }
+.karaoke-disc.spinning { animation: discSpin 2s linear infinite; }
+@keyframes discSpin { to { transform: rotate(360deg); } }
+.karaoke-art { width: 180px; height: 180px; border-radius: 16px; object-fit: cover; box-shadow: 0 8px 32px rgba(0,0,0,0.5); }
+
 /* ── Movie recap ───────────────────────────────── */
 .recap-meta { margin: 6px 0 8px; }
 .confidence-badge { display: inline-flex; align-items: center; padding: 5px 12px; border-radius: 999px; font-size: 0.82rem; font-weight: 600; border: 1px solid; }
