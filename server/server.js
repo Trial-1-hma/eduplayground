@@ -4,7 +4,8 @@ import dotenv from 'dotenv';
 import bcrypt from 'bcryptjs';
 import { Pool } from 'pg';
 import { questionTemplates } from './data/questions.js';
-import { isFoundryConfigured, generateRiddle, randomTopic, classifyImage, generateLogoHint } from './services/foundry.js';
+import { isFoundryConfigured, generateRiddle, randomTopic, classifyImage, generateLogoHint, generateBedtimeStory } from './services/foundry.js';
+import { synthesizeSpeech } from './services/tts.js';
 
 dotenv.config();
 
@@ -121,6 +122,41 @@ app.post('/api/foundry/logo-hint', async (req, res) => {
     res.json({ hint });
   } catch (err) {
     res.status(500).json({ error: 'Failed to generate hint. Please try again.' });
+  }
+});
+
+app.post('/api/foundry/story', async (req, res) => {
+  if (!isFoundryConfigured()) {
+    return res.status(503).json({ error: 'Foundry IQ is not configured. Add GITHUB_TOKEN to server/.env' });
+  }
+  const { hero, trait, place, friend, magic } = req.body || {};
+  if (!hero || !trait || !place || !friend || !magic) {
+    return res.status(400).json({ error: 'hero, trait, place, friend, and magic are required.' });
+  }
+  try {
+    const story = await generateBedtimeStory({ hero, trait, place, friend, magic });
+    res.json({ story });
+  } catch (err) {
+    console.error('generateBedtimeStory error:', err.message);
+    res.status(500).json({ error: 'Failed to generate the story. Please try again.' });
+  }
+});
+
+app.post('/api/tts', async (req, res) => {
+  const { text } = req.body || {};
+  if (!text || typeof text !== 'string') {
+    return res.status(400).json({ error: 'text is required.' });
+  }
+  if (text.length > 2000) {
+    return res.status(400).json({ error: 'text is too long (max 2000 characters).' });
+  }
+  try {
+    const audio = await synthesizeSpeech(text);
+    res.set('Content-Type', 'audio/mpeg');
+    res.send(audio);
+  } catch (err) {
+    console.error('tts error:', err.message);
+    res.status(500).json({ error: 'Speech synthesis failed.' });
   }
 });
 

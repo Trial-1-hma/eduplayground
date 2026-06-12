@@ -135,6 +135,11 @@ input[type="range"] { padding: 0; background: transparent; border: none; accent-
 .timer-btn { border: 1px solid rgba(255,255,255,0.2); border-radius: 999px; padding: 8px 14px; background: transparent; color: white; cursor: pointer; }
 .timer-btn.selected { border-color: #45d3bf; background: rgba(69, 211, 191, 0.2); color: #45d3bf; font-weight: 600; }
 
+/* ── Story teller ───────────────────────────────── */
+.story-text { display: flex; flex-direction: column; gap: 4px; }
+.story-paragraph { font-size: 1.05rem; line-height: 1.7; color: #dce8f7; padding: 6px 10px; border-radius: 10px; margin: 0 0 6px; transition: background 0.3s, color 0.3s; }
+.story-paragraph.reading, .story-title.reading { background: rgba(69, 211, 191, 0.14); color: #fff; box-shadow: inset 3px 0 0 #45d3bf; }
+
 
 
 

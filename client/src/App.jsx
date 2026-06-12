@@ -8,6 +8,7 @@ import FoundryRiddle from './components/FoundryRiddle';
 import PhotoQuiz from './components/PhotoQuiz';
 import LogoGuesser from './components/LogoGuesser';
 import SleepSounds from './components/SleepSounds';
+import StoryTeller from './components/StoryTeller';
 
 function App() {
   const [view, setView] = useState('home');
@@ -35,6 +36,7 @@ function App() {
       {view === 'photoQuiz' && <PhotoQuiz onBack={() => setView('kids')} />}
       {view === 'logoGuesser' && <LogoGuesser onBack={() => setView('kids')} />}
       {view === 'sleepSounds' && <SleepSounds onBack={() => setView('home')} />}
+      {view === 'storyTeller' && <StoryTeller onBack={() => setView('kids')} />}
     </div>
   );
 }

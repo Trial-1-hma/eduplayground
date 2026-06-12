@@ -28,6 +28,12 @@ function KidsMenu({ onNavigate, onBack }) {
         </div>
         <div className="exam-card foundry-card">
           <div className="foundry-badge">✦ Foundry IQ</div>
+          <h3>Bedtime Story Teller</h3>
+          <p>Answer 5 fun questions and AI writes a 10-minute bedtime story, then reads it aloud to you.</p>
+          <button className="primary-btn" onClick={() => onNavigate('storyTeller')}>Make my story</button>
+        </div>
+        <div className="exam-card foundry-card">
+          <div className="foundry-badge">✦ Foundry IQ</div>
           <h3>Logo Guesser</h3>
           <p>Look at a brand icon and type the name. How many can you get right?</p>
           <button className="primary-btn" onClick={() => onNavigate('logoGuesser')}>Play logo quiz</button>
