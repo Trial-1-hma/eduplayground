@@ -205,6 +205,29 @@ npm run dev
 
 ---
 
+## Deployment (Vercel + Render)
+
+The frontend is static and deploys to **Vercel**. The backend is a long-lived **Express + WebSocket** server (Word Battle needs persistent sockets and keeps game state in memory), which Vercel's serverless functions can't host — so it deploys to **Render** (or any host that runs a persistent Node process). Render injects its own `PORT`; `server.js` already reads `process.env.PORT`, so no port edits are needed.
+
+**1. Backend → Render**
+- New → **Blueprint**, point it at this repo (it reads [`render.yaml`](render.yaml)), or create a **Web Service** manually with build `npm install` and start `npm run start`.
+- Add the `GITHUB_TOKEN` env var in the Render dashboard.
+- Note the resulting URL, e.g. `https://eduplayground-api.onrender.com`.
+
+**2. Frontend → Vercel**
+- Import the repo. Vercel uses [`vercel.json`](vercel.json) (builds the `client/` workspace into `client/dist`).
+- Add an env var **`VITE_API_URL`** = your Render backend URL (from step 1).
+- Deploy. The client derives the WebSocket URL from `VITE_API_URL` automatically (`https` → `wss`).
+
+> The free Render tier sleeps after inactivity and resets in-memory state (battle rooms, karaoke rounds) — fine for a demo; the first request after a sleep takes a few seconds to wake.
+
+| Service | Host | Port |
+|---|---|---|
+| Frontend (static) | Vercel | n/a (CDN) |
+| Backend + WebSocket | Render | injected via `PORT` |
+
+---
+
 ## Project Structure
 
 ```
